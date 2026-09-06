@@ -15,3 +15,11 @@ Errors:
 
 ## GET /api/posts?page=n
 Success: 200 { posts: PostPublic[], page: number, hasMore: boolean }
+
+## POST /api/posts/:id/comments
+Request: { body: string, accessToken: string }
+Success: 201 { id: string, postId: string, authorId: string, body: string, createdAt: DateTime }
+Errors:
+    400 INVALID_COMMENT_BODY — "Comment body must be non-empty"
+    401 UNAUTHENTICATED_REQUEST — "Authentication is required to post a comment"
+    404 POST_NOT_FOUND — "Requested post not found"
