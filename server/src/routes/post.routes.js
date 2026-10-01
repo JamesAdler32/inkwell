@@ -10,7 +10,7 @@ const router = Router();
 router.post("/posts", async (req, res) => {
     try {
         const { authorId, title, body } = req.body;
-        const post = await PostService.publish({ authorId, title,body });
+        const post = await PostService.publish({ authorId, title, body });
         res.status(201).json(post);
     } catch (err) {
         res.status(400).json({
@@ -19,14 +19,17 @@ router.post("/posts", async (req, res) => {
     }
 });
 
-router.get("/posts", async (req, res, next) => {
-    try {
-        const page = Number(req.query.page) || 1;
-        const result = await PostService.listPublished({ page });
-        res.status(200).json(result);
-    } catch (err) {
-        next(err);
-    }
+router.get("/posts", async (req, res) => {
+    const { page = 1, search } = req.query;
+    const result = search
+        ? await PostService.search({
+            query: search, page: Number
+                (page)
+        })
+        : await PostService.listPublished({
+            page: Number(page)
+        });
+    res.status(200).json(result);
 });
 
 export default router;
