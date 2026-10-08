@@ -23,5 +23,10 @@
 - Defect cause category distribution
 - Review turnaround (informal, tracked qualitatively at this project's scale)
 
+## Metrics Snapshot as of 10/7/26
+- Commits: 18
+- Logged defects: 1
+- Backlog items marked "Requirements Defined" or later: 4
+
 ## Ownership
 - For this course project: the student/team implementing Inkwell owns SQA plan adherence.
