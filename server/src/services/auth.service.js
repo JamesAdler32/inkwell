@@ -7,9 +7,9 @@ import { UserRepository } from "../repositories/user.repository.js";
 import { assertNonEmpty, ValidationError } from "../utils/validation.js";
 import { TokenService } from "./token.service.js";
 
-class EmailAlreadyRegisteredError extends Error {}
-class WeakPasswordError extends Error {}
-class InvalidCredentialsError extends Error {}
+class EmailAlreadyRegisteredError extends Error { }
+class WeakPasswordError extends Error { }
+class InvalidCredentialsError extends Error { }
 
 const BCRYPT_COST_FACTOR = 10; // see Lecture 15 for the security tradeoff this number encodes
 const MIN_PASSWORD_LENGTH = 8;
@@ -49,7 +49,7 @@ export const AuthService = {
 
     async login({ email, password }) {
         const user = await UserRepository.findByEmail(email);
-        
+
         if (!user) {
             throw new InvalidCredentialsError();
         }
@@ -65,4 +65,9 @@ export const AuthService = {
     },
 };
 
-export { EmailAlreadyRegisteredError, WeakPasswordError, InvalidCredentialsError, ValidationError };
+export {
+    EmailAlreadyRegisteredError,
+    WeakPasswordError,
+    InvalidCredentialsError,
+    ValidationError,
+};
