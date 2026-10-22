@@ -74,8 +74,8 @@ export function PostEditor() {
                     id="post-body"
                     value={body}
                     onChange={(e) => {
-                        setBody(e.target.value); setStat
-                        us(STATES.EDITING);
+                        setBody(e.target.value); 
+                        setStatus(STATES.EDITING);
                     }}
                     rows={10}
                     className="mt-1 block w-full rounded border-gray-300 shadow-sm"

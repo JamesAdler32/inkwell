@@ -11,7 +11,10 @@ export const PostService = {
         assertNonEmpty(body, "body", "MISSING_BODY");
 
         const post = await PostRepository.createWithTags({
-            authorId, title, body, tagNames,
+            authorId,
+            title,
+            body,
+            tagNames,
             status: "PUBLISHED",
             publishedAt: new Date(),
         });
@@ -22,13 +25,12 @@ export const PostService = {
             title: post.title,
             tags: tagNames,
         });
-        
+
         return post;
     },
 
     async listPublished({ page = 1, pageSize = 10 }) {
-        const { posts, hasMore } = await PostRepository.findPubli
-        shed({
+        const { posts, hasMore } = await PostRepository.findPublished({
             page,
             pageSize,
         });
