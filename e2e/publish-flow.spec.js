@@ -15,6 +15,10 @@ const viewports = [
         name: "mobile", viewport: devices["iPhone 13"].viewport
     },
     {
+        name: "tablet",
+        viewport: { width: 768, height: 1024 },
+    },
+    {
         name: "desktop", viewport: { width: 1280, height: 800 }
     },
 ];
