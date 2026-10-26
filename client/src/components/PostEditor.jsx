@@ -61,8 +61,8 @@ export function PostEditor() {
                         id="post-title"
                         value={title}
                         onChange={(e) => {
-                            setTitle(e.target.value); setS
-                            tatus(STATES.EDITING);
+                            setTitle(e.target.value); 
+                            setStatus(STATES.EDITING);
                         }}
                         className="mt-1 block w-full rounded border-gray-300 shadow-sm"
                         aria-describedby={errorMessage ? "post-error" : undefined}
@@ -76,8 +76,8 @@ export function PostEditor() {
                         id="post-body"
                         value={body}
                         onChange={(e) => {
-                            setBody(e.target.value); setSt
-                            atus(STATES.EDITING);
+                            setBody(e.target.value); 
+                            setStatus(STATES.EDITING);
                         }}
                         rows={10}
                         className="mt-1 block w-full rounded border-gray-300 shadow-sm"
