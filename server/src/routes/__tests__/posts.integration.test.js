@@ -66,3 +66,35 @@ test("registering with a duplicate email fails end to end (US-01 extension 3a, v
     expect(secondAttempt.status).toBe(400);
     expect(secondAttempt.body.error.code).toBe("EMAIL_ALREADY_REGISTERED");
 });
+
+test("clamps oversized pageSize to 25", async () => {
+    const registerRes = await request(app)
+        .post("/api/auth/register")
+        .send({
+            email: "alice@example.com",
+            displayName: "Alice",
+            password: "correcthorse"
+        });
+
+    expect(registerRes.status).toBe(201);
+    const { user, accessToken } = registerRes.body;
+
+    for (let i = 1; i <= 26; i++) {
+        const publishRes = await request(app)
+            .post("/api/posts")
+            .set("Authorization", `Bearer ${accessToken}`)
+            .send({
+                authorId: user.id,
+                title: `Post ${i}`,
+                body: `Body for post ${i}.`
+            });
+
+        expect(publishRes.status).toBe(201);
+    }
+
+    const feedRes = await request(app)
+        .get("/api/posts?page=1&pageSize=26");
+
+    expect(feedRes.status).toBe(200);
+    expect(feedRes.body.posts).toHaveLength(25);
+});
